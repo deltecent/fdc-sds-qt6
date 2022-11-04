@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>FDC+ Serial Drive Server</Name>
+    <Version>1.0.0</Version>
+    <Title>FDC+ Serial Driver Server Installer</Title>
+    <Publisher>Deltec Enterprises</Publisher>
+    <TargetDir>@HomeDir@/FDC+</TargetDir>
+    <RemoveTargetDir>true</RemoveTargetDir>
+    <StartMenuDir></StartMenuDir>
+</Installer>
