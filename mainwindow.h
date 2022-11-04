@@ -56,7 +56,7 @@ private:
     QLineEdit *fname[MAX_DRIVE];
     QLabel *enaLed[MAX_DRIVE];
     QLabel *hlLed[MAX_DRIVE];
-    QPixmap *grnLed;
+    QPixmap *offLed;
     QPixmap *redLed;
     QProgressBar *trackBar[MAX_DRIVE];
     QLabel *diskSize[MAX_DRIVE];

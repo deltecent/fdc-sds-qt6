@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "fdc.h"
-#include "grnled.xpm"
 #include "qlineedit.h"
 #include "redledx18.xpm"
 #include "offledx18.xpm"
@@ -17,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     settings = new QSettings("Deltec", "FDC+");
 
     // Pixmaps
-    grnLed = new QPixmap(redled_xpm);
-    redLed = new QPixmap(offled_xpm);
+    redLed = new QPixmap(redled_xpm);
+    offLed = new QPixmap(offled_xpm);
 
     // Status and Message Labels
     statusLabel = this->findChild<QLabel *>(QString("statusLabel"));
@@ -29,9 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
         trackBar[drive] = this->findChild<QProgressBar *>(QString("progressBar%1").arg(drive));
         trackBar[drive]->setValue(0);
         enaLed[drive] = this->findChild<QLabel *>(QString("ena%1").arg(drive));
-        enaLed[drive]->setPixmap(*redLed);
+        enaLed[drive]->setPixmap(*offLed);
         hlLed[drive] = this->findChild<QLabel *>(QString("hl%1").arg(drive));
-        hlLed[drive]->setPixmap(*redLed);
+        hlLed[drive]->setPixmap(*offLed);
         fname[drive] = this->findChild<QLineEdit *>(QString("fname%1").arg(drive));
         mountButton[drive] = this->findChild<QPushButton *>(QString("mountButton%1").arg(drive));
         unmountButton[drive] = this->findChild<QPushButton *>(QString("unmountButton%1").arg(drive));
@@ -170,13 +169,13 @@ void MainWindow::trackChangedSlot(quint8 drive, quint16 track) {
 
 void MainWindow::driveChangedSlot(quint8 drive) {
     for (int i = 0; i < MAX_DRIVE; i++) {
-        enaLed[i]->setPixmap((i == drive) ? *grnLed : *redLed);
+        enaLed[i]->setPixmap((i == drive) ? *redLed : *offLed);
     }
 }
 
 void MainWindow::headChangedSlot(quint8 drive, bool head) {
     if (drive <= MAX_DRIVE) {
-        hlLed[drive]->setPixmap((head) ? *grnLed : *redLed);
+        hlLed[drive]->setPixmap((head) ? *redLed : *offLed);
     }
     else {
         assertError(tr("headChanged"), QString("Drive number %1 is out of range").arg(drive));
